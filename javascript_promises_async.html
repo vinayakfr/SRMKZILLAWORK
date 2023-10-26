@@ -1,0 +1,31 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRMKZILLA</title>
+</head>
+<body>
+    <h1>Product Details</h1>
+    <span id="api-data">Product details will be shown here</span>
+    <script>
+        //This functions displays the product title and description in the span element
+        function displayProduct(productData){
+            let productDetail="" + productData["title"] + ": " + productData["description"];
+            document.getElementById("api-data").innerHTML = productDetail;
+        }
+        //This functions displays error message in span element
+        function handleError(error){
+            document.getElementById("api-data").innerHTML = "Error occurred while getting details";
+        }
+        //Checking fo errors
+        try{
+            //Calling GET API using fetch()
+            let productResponse = await fetch("https://dummyjson.com/products/1");
+            let productData = await productResponse.json();
+            displayProduct(productData); //Display product details
+        }catch(error){
+            handleError(error); //Handle error
+        }
+    </script>
+</body>
+</html>
